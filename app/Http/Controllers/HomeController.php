@@ -8,7 +8,25 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function home()
+    {
+        return view('home');
+    }
     public function index()
     {
         $categories = Category::query()->where('is_active', true)->get();
@@ -34,13 +52,9 @@ class HomeController extends Controller
     public function detailProduct($category_id, $id, $slug)
     {
         $product = Product::findOrFail($id);
-        $relatedProducts = Product::where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id)
-            ->take(4)
-            ->get();
-            // dd($relatedProducts);
+        $relatedProducts = $product->category->products()->where('id','!=','$product->id')->where('slug','!=','$product->slug')->limit(4)->get();
         $categories = Category::query()->where('is_active', true)->get();
-    
+
         
         return view('client.detail', compact('product', 'relatedProducts', 'categories'));
     }
@@ -55,4 +69,4 @@ class HomeController extends Controller
         return view('client.trangchu',compact('products','key','categories'));
                                     
     }
-}   
+}
