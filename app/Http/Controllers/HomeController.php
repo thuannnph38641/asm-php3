@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Closure;
 
 class HomeController extends Controller
 {
@@ -23,8 +24,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function home()
+    public function home(Request $request)
     {
+        if(auth()->user()->type === 'admin'){
+            $request->session()->put('admin', true);
+        }else {
+            $request->session()->put('admin', false);
+        }
+
+        if(auth()->user()->type === 'member'){
+            $request->session()->put('member', true);
+        }else {
+            $request->session()->put('member', false);
+        }
         return view('home');
     }
     public function index()
@@ -52,10 +64,13 @@ class HomeController extends Controller
     public function detailProduct($category_id, $id, $slug)
     {
         $product = Product::findOrFail($id);
-        $relatedProducts = $product->category->products()->where('id','!=','$product->id')->where('slug','!=','$product->slug')->limit(4)->get();
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
+            ->where('slug', '!=', $product->slug)
+            ->limit(4)
+            ->get();
         $categories = Category::query()->where('is_active', true)->get();
-
-        
+    
         return view('client.detail', compact('product', 'relatedProducts', 'categories'));
     }
     
@@ -69,4 +84,5 @@ class HomeController extends Controller
         return view('client.trangchu',compact('products','key','categories'));
                                     
     }
+  
 }

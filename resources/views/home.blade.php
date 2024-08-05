@@ -14,10 +14,13 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Đăng nhập thành công!') }}
+
                 </div>
             </div>
         </div>
     </div>
+   
 </div>
+
 @endsection

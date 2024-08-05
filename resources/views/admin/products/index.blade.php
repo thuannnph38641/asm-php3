@@ -11,8 +11,8 @@
                 <th>Category Name</th>
                 <th>Slug</th>
                 <th>Image</th>
-                <th>Price_regular</th>
-                <th>Price_sale</th>
+                <th>Price Regular</th>
+                <th>Price Sale</th>
                 <th>Description</th>
                 <th>Content</th>
                 <th>Created_at</th>
@@ -39,7 +39,9 @@
                     <td>
                         <a href="{{route('admin.products.show',$item->id)}}" class="btn btn-info">Show</a>
                         <a href="{{route('admin.products.edit',$item->id)}}" class="btn btn-warning">Sửa</a>
-                        <a href="{{route('admin.products.destroy',$item->id)}}" class="btn btn-danger">Xóa</a>
+                        <a href="{{route('admin.products.destroy',$item->id)}}" class="btn btn-danger"
+                            onclick ="return confirm('Bạn có muốn xóa không?')"
+                            >Xóa</a>
                     </td>
                 </tr>
             @endforeach

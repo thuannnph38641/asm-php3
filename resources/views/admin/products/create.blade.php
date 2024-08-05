@@ -8,7 +8,7 @@
         <!-- Các trường input ở cột bên trái -->
         <div class="mb-3">
           <label for="name" class="form-label">Name Products</label>
-          <input type="text" class="form-control" id="name" name="name" value="{{ old('name')}}">
+          <input type="text" class="form-control" id="name" name="name" {{ old('name')}}>
           @error('name')
            <span class="text-danger">{{ $message }}</span>
           @enderror
@@ -17,20 +17,20 @@
             <label for="category" class="form-label">Category</label><br>   
             <select name="category_id" id="category" class="form-select" >
                 @foreach ($categories as $id =>$name)
-                <option value="{{$id}}" >{{$name}}</option>
+                <option value="{{$id}}" >{{$name}} </option>
                 @endforeach 
             </select>
           </div>
           <div class="mb-3">
             <label for="" class="form-label">Slug</label>
-            <input type="text" class="form-control" id="" name="slug" value="{{ old('slug')}}"  >
+            <input type="text" class="form-control" id="" name="slug" {{ old('slug')}}  >
             @error('slug')
              <span class="text-danger">{{ $message }}</span>
             @enderror
           </div>
         <div class="mb-3">
             <label for="" class="form-label">Image</label>
-            <input type="file" class="form-control" id="" name="image" value="{{ old('image')}}">
+            <input type="file" class="form-control" id="" name="image" {{ old('image')}}>
             @error('image')
             <span class="text-danger">{{ $message }}</span>
            @enderror
@@ -38,7 +38,6 @@
          
       </div>
       <div class="col-md-6">
-        <!-- Các trường input ở cột bên phải -->
         <div class="mb-3">
           <label for="phone" class="form-label">Price Regular</label>
           <input type="number" class="form-control" id="phone" name="price_regular" {{ old('price_regular')}}>

@@ -37,7 +37,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="{{ route('admin.products.index') }}">Sản phẩm</a>
-                <a class="collapse-item" href="cards.html">Danh mục</a>
+                <a class="collapse-item" href="{{ route('admin.categories.index')}}">Danh mục</a>
             </div>
         </div>
     </li>

@@ -52,6 +52,7 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
+                                    
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -60,6 +61,19 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                   
+                                    @if(session('admin'))
+                                    <a class="dropdown-item" href="{{ route('admin.') }}"
+                                    >
+                                    {{ __(' Vào trang quản trị') }}
+                                 </a>
+                                    @endif
+                                    @if(session('member'))
+                                    <a class="dropdown-item" href="{{ route('member.') }}"
+                                    >
+                                    {{ __(' Vào trang Cart') }}
+                                </a>
+                                    @endif
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
